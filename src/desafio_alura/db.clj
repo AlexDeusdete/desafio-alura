@@ -28,43 +28,48 @@
                           :validade "2024-07"
                           :limite   2000.00}]})
 
-(def cliente3 {:id      777
-               :nome    "Giovana Lima"
-               :cpf     "222.222.222-22"
-               :e-mail  "gi.lima@teste.com.br"
-               :cartoes [{:id       777222
-                          :tipo     :fisico
-                          :numero   "0000 0000 0000 7772"
-                          :cvv      772
-                          :validade "2033-01"
-                          :limite   19000.00}]})
-
 (def compra1 {:id              1
               :data            "2021-07-20"
               :valor           500.00
               :estabelecimento :super-mercado-extra
               :categoria       :alimentacao
-              :cliente (dissoc cliente1 :cartoes)
-              :cartao-id       (get-in cliente1 [:cartoes 0])})
+              :cliente         (dissoc cliente1 :cartoes)
+              :cartao       (get-in cliente1 [:cartoes 0])})
 
 (def compra2 {:id              2
               :data            "2021-07-01"
               :valor           900.00
               :estabelecimento :farma-sao-paulo
               :categoria       :saude
-              :cliente (dissoc cliente1 :cartoes)
-              :cartao-id       (get-in cliente1 [:cartoes 1])})
+              :cliente         (dissoc cliente1 :cartoes)
+              :cartao       (get-in cliente1 [:cartoes 1])})
 
 (def compra3 {:id              3
               :data            "2021-06-03"
               :valor           1500.00
               :estabelecimento :unip
               :categoria       :educacao
-              :cliente (dissoc cliente2 :cartoes)
-              :cartao-id       (get-in cliente2 [:cartoes 0])})
+              :cliente         (dissoc cliente2 :cartoes)
+              :cartao          (get-in cliente2 [:cartoes 0])})
+
+(def compra4 {:id              4
+              :data            "2021-07-01"
+              :valor           750.00
+              :estabelecimento :super-mercado-pao-acucar
+              :categoria       :alimentacao
+              :cliente         (dissoc cliente1 :cartoes)
+              :cartao       (get-in cliente1 [:cartoes 0])})
+
+(def compra5 {:id              5
+              :data            "2021-08-20"
+              :valor           150.00
+              :estabelecimento :farma-droga
+              :categoria       :saude
+              :cliente         (dissoc cliente1 :cartoes)
+              :cartao       (get-in cliente1 [:cartoes 0])})
 
 (defn todas-as-compras []
-  [compra1 compra2 compra3])
+  [compra1 compra2 compra3 compra4 compra5])
 
 (defn todos-os-clientes []
-  [cliente1 cliente2 cliente3])
+  [cliente1 cliente2])
