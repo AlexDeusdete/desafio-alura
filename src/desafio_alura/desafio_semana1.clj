@@ -1,6 +1,7 @@
 (ns desafio-alura.desafio-semana1
   (:require [desafio-alura.db :as da.db]
-            [desafio-alura.logic :as da.logic]))
+            [desafio-alura.logic :as da.logic]
+            [java-time :as jtime]))
 
 (def todas-as-compras (da.db/todas-as-compras))
 (def todos-os-clientes (da.db/todos-os-clientes))
@@ -29,3 +30,12 @@
            todas-as-compras
            :valor
            500.00))
+
+(println "\n\n\n\n Imprimindo as compras do mes")
+(def compras-da-fatura-atual (da.logic/todas-as-compras-da-fatura
+                               todas-as-compras
+                               (jtime/local-date 2021 07 01)
+                               (jtime/local-date 2021 07 31)))
+
+(println compras-da-fatura-atual)
+(println (da.logic/total-das-compras compras-da-fatura-atual))

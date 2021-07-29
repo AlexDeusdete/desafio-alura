@@ -1,4 +1,5 @@
-(ns desafio-alura.logic)
+(ns desafio-alura.logic
+  (:require [java-time :as jtime]))
 
 (defn total-das-compras
   [compras]
@@ -45,3 +46,21 @@
 (defn todas-as-compras-com-um-valor-de-atributo-especifico
   [compras atributo valor]
   (filter #(= (atributo %) valor) compras))
+
+(defn compra-no-periodo?
+  [compra periodo-inicio periodo-fim]
+  (let [data-da-compra (:data compra)
+        periodo-inicio-exclusive (jtime/minus periodo-inicio (jtime/days 1))
+        periodo-fim-exclusive (jtime/plus periodo-fim (jtime/days 1))]
+    (and (jtime/after? data-da-compra periodo-inicio-exclusive)
+         (jtime/before? data-da-compra periodo-fim-exclusive))))
+
+;(defn compra-no-periodo?
+;  [compra periodo-inicio periodo-fim]
+;  (let [data-da-compra (:data compra)]
+;    (and (<= (jtime/time-between data-da-compra periodo-inicio :days) 0)
+;         (>= (jtime/time-between data-da-compra periodo-fim :days) 0))))
+
+(defn todas-as-compras-da-fatura
+  [compras data-abertura data-fechamento]
+  (filter #(compra-no-periodo? % data-abertura data-fechamento) compras))
