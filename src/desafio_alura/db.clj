@@ -34,7 +34,7 @@
               :estabelecimento :super-mercado-extra
               :categoria       :alimentacao
               :cliente         (dissoc cliente1 :cartoes)
-              :cartao       (get-in cliente1 [:cartoes 0])})
+              :cartao          (get-in cliente1 [:cartoes 0])})
 
 (def compra2 {:id              2
               :data            "2021-07-01"
@@ -42,7 +42,7 @@
               :estabelecimento :farma-sao-paulo
               :categoria       :saude
               :cliente         (dissoc cliente1 :cartoes)
-              :cartao       (get-in cliente1 [:cartoes 1])})
+              :cartao          (get-in cliente1 [:cartoes 1])})
 
 (def compra3 {:id              3
               :data            "2021-06-03"
@@ -58,7 +58,7 @@
               :estabelecimento :super-mercado-pao-acucar
               :categoria       :alimentacao
               :cliente         (dissoc cliente1 :cartoes)
-              :cartao       (get-in cliente1 [:cartoes 0])})
+              :cartao          (get-in cliente1 [:cartoes 0])})
 
 (def compra5 {:id              5
               :data            "2021-08-20"
@@ -66,7 +66,7 @@
               :estabelecimento :farma-droga
               :categoria       :saude
               :cliente         (dissoc cliente1 :cartoes)
-              :cartao       (get-in cliente1 [:cartoes 0])})
+              :cartao          (get-in cliente1 [:cartoes 0])})
 
 (defn todas-as-compras []
   [compra1 compra2 compra3 compra4 compra5])
