@@ -1,6 +1,7 @@
-(ns desafio-alura.desafio-semana1
-  (:require [desafio-alura.db :as da.db]
-            [desafio-alura.logic :as da.logic]
+(ns desafio-alura.logic-test
+  (:require [clojure.test :refer :all]
+            [desafio-alura.logic :refer :all]
+            [desafio-alura.db :as da.db]
             [java-time :as jtime]
             [schema.core :as s]))
 
@@ -78,29 +79,21 @@
 (def todas-as-compras (da.db/adiciona-compra todas-as-compras compra4))
 (def todas-as-compras (da.db/adiciona-compra todas-as-compras compra5))
 
-(println (group-by :cartao todas-as-compras))
+(deftest todas-as-compras-com-um-valor-de-atributo-especifico-test
 
-(println (da.logic/resumo-por-cartao-e-categoria todas-as-compras))
-(println (da.logic/total-das-compras-por-categoria todas-as-compras))
+  (testing "busca lista de compra por um atributo existente"
+    (is (= (count (todas-as-compras-com-um-valor-de-atributo-especifico todas-as-compras :categoria :saude)) 2)))
 
-(println todas-as-compras)
-(println (filter #(= (:categoria %) :saude) todas-as-compras))
+  (testing "busca lista de compra por um atributo inexistente"
+    (is (= (count (todas-as-compras-com-um-valor-de-atributo-especifico todas-as-compras :nao-existe :saude)) 0))))
 
-(println (da.logic/todas-as-compras-com-um-valor-de-atributo-especifico
-           todas-as-compras
-           :estabelecimento
-           :farma-droga))
-(println (da.logic/todas-as-compras-com-um-valor-de-atributo-especifico
-           todas-as-compras
-           :valor
-           500.00))
+(deftest total-das-compras-por-categoria-test
 
-(println "\n\n\n\n Imprimindo as compras do mes")
-(def compras-da-fatura-atual (da.logic/todas-as-compras-da-fatura
-                               todas-as-compras
-                               (jtime/local-date 2021 07 01)
-                               (jtime/local-date 2021 07 31)))
+  (testing "gera relatorio de uma lista de compras preenchida"
+    (is (= (count (total-das-compras-por-categoria todas-as-compras)) 3)))
 
-(println compras-da-fatura-atual)
-(println (class compras-da-fatura-atual))
-(println (da.logic/total-das-compras compras-da-fatura-atual))
+  (testing "gera relatorio de uma lista de compras vazia"
+    (is (= (count (total-das-compras-por-categoria [])) 0)))
+
+  (testing "gera relatorio de uma lista nula"
+    (is (= (count (total-das-compras-por-categoria nil)) 0))))

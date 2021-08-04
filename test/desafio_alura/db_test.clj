@@ -1,14 +1,9 @@
 (ns desafio-alura.db-test
   (:require [clojure.test :refer :all]
             [desafio-alura.db :refer :all]
-            [desafio-alura.model :as da.model]
             [java-time :as jtime]
             [clojure.test.check.clojure-test :refer (defspec)]
-            [clojure.test.check.generators :as gen]
-            [clojure.test.check.properties :as prop]
-            [schema.core :as s]
-            [schema-generators.generators :as g]
-            [schema-generators.complete :as c]))
+            [schema.core :as s]))
 
 (s/set-fn-validation! true)
 
